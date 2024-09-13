@@ -41,11 +41,13 @@ public class BiomeSkyLighting {
         event.getGenerator().addProvider(true, new BiomeLightProvider(event.getGenerator()) {
             @Override
             protected void generateLights(BiConsumer<String, JsonElement> consumer) {
-                new BiomeLightBuilder("data/minecraft")
+                new BiomeLightBuilder("minecraft/biomelights")
                         .biomeLight(Biomes.FOREST, 8)
-                        .biomeLight(Biomes.PLAINS, 3)
-                        .biomeLight(Biomes.DRIPSTONE_CAVES, 12)
-                        .biomeLight(Biomes.LUSH_CAVES, 10)
+                        .biomeLight(Biomes.PLAINS, 10)
+                        .biomeLight(Biomes.DRIPSTONE_CAVES, 3)
+                        .biomeLight(Biomes.LUSH_CAVES, 5)
+                        .biomeLight(Biomes.SWAMP, 6)
+                        .biomeLight(Biomes.DESERT, 15)
                         .run(consumer);
             }
         });

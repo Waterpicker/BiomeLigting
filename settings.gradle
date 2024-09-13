@@ -7,7 +7,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             switch (requested.id.toString()) {
-                case "net.minecraftforge.gradle": {
+                case "net.neoforged:forge": {
                     useModule("${requested.id}:ForgeGradle:${requested.version}")
                     break
                 }

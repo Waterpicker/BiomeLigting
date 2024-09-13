@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "biomeslights": {
+    "minecraft:forest": 8,
+    "minecraft:plains": 10,
+    "minecraft:swamp": 6,
+    "minecraft:desert": 15
+  }
+}

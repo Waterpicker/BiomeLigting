@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public abstract class BiomeLightProvider implements DataProvider {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -33,20 +35,17 @@ public abstract class BiomeLightProvider implements DataProvider {
     abstract protected void generateLights(BiConsumer<String, JsonElement> consumer);
 
     @Override
-    public void run(CachedOutput cache) {
-        Path path = generator.getOutputFolder();
+    public CompletableFuture<?> run(CachedOutput cache) {
+        Path path = generator.getPackOutput().getOutputFolder();
 
         BiConsumer<String, JsonElement> consumer = (identifier, json)  -> {
             java.nio.file.Path outputPath = getOutput(path, identifier);
 
-            try {
-                DataProvider.saveStable(cache, json, outputPath);
-            } catch (IOException var6) {
-                LOGGER.error("Couldn't save biomelight {}", outputPath, var6);
-            }
+            DataProvider.saveStable(cache, json, outputPath);
         };
 
         generateLights(consumer);
+        return new CompletableFuture<>(); //TODO why you broke completable future
     }
 
     @Override
@@ -55,7 +54,7 @@ public abstract class BiomeLightProvider implements DataProvider {
     }
 
     private static java.nio.file.Path getOutput(Path rootOutput, String modid) {
-        return rootOutput.resolve("data/" + modid + "/biomelights.json");
+        return rootOutput.resolve("data/" + modid + "/biomelights/biomelights.json");
     }
 
     public static class BiomeLightBuilder {

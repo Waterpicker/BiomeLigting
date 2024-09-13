@@ -1,9 +1,0 @@
-{
-  "replace": true,
-  "biomeslights": {
-    "minecraft:forest": 8,
-    "minecraft:plains": 3,
-    "minecraft:lush_caves": 10,
-    "minecraft:dripstone_caves": 12
-  }
-}
